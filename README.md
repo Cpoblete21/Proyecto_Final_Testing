@@ -8,3 +8,10 @@ Este proyecto contiene pruebas automatizadas End-to-End (E2E) para validar funci
 
 - Las pruebas **front-end** se implementaron con **Cypress** y validan flujos de usuario en la aplicación web: login, creación, edición y eliminación de productos, y control de acceso.
 - Las pruebas **backend** se realizaron con **Postman** y **Newman**, verificando los endpoints REST API para login y gestión de clientes con autenticación.
+
+
+- comandos front end : npx cypress run
+                       npx cypress open  (for GUI)
+
+- comandos back end : newman run collections/Backend_e2e.postman_collection.json (cli report)
+                      newman run collections/Backend_2e2.postman_collection.json -r htmlextra --reporter-htmlextra-export report.html  (HTML Report)
