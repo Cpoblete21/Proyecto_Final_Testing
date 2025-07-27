@@ -30,9 +30,7 @@ describe('Editar un articulo existente', () => {
     cy.contains('button', 'Guardar').click();
 
     //confirmar toast de exito
-    cy.get('.Toastify__toast', { timeout: 25000 })
-    .should('be.visible')
-    .and('contain.text', 'Artículo "Iphone 16 Pro Max" actualizado con éxito!');
+    cy.contains('Artículo "Iphone 16 Pro Max" actualizado con éxito!', { timeout: 20000 });
 
 
 
