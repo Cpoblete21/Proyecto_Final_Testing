@@ -1,0 +1,288 @@
+{
+	"info": {
+		"_postman_id": "c12720ad-6d05-4d63-a08b-6be901b4dc64",
+		"name": "Backend_2e2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27538126"
+	},
+	"item": [
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Login exitoso\", () => {\r",
+							"  pm.response.to.have.status(200);\r",
+							"  pm.expect(pm.response.json()).to.have.property(\"access_token\");\r",
+							"  // guardar token as an environment variable para futuros usos\r",
+							"  pm.environment.set(\"authToken\", pm.response.json().access_token);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"tester@adl.com\",\r\n  \"password\": \"testerEngineer\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-tester-adl.leonardojose.dev/api/login",
+					"protocol": "https",
+					"host": [
+						"api-tester-adl",
+						"leonardojose",
+						"dev"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validar Consulta de clientes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Consulta de clientes exitosa\", () => {\r",
+							"  pm.response.to.have.status(200);\r",
+							"  pm.expect(pm.response.json()).to.be.an('array'); // Asumiendo que devuelve una lista\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authToken}}",
+						"description": "Login in token",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api-tester-adl.leonardojose.dev/api/clients",
+					"protocol": "https",
+					"host": [
+						"api-tester-adl",
+						"leonardojose",
+						"dev"
+					],
+					"path": [
+						"api",
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar un nuevo cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Cliente creado exitosamente\", () => {\r",
+							"  pm.response.to.have.status(201);\r",
+							"  pm.expect(pm.response.json()).to.have.property(\"id\");\r",
+							"  // Guardamos el id para usarlo en PUT y DELETE\r",
+							"  pm.environment.set(\"clientId\", pm.response.json().id);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Cris Poblete\",\r\n  \"email\": \"Cris@Poblete.com\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-tester-adl.leonardojose.dev/api/clients",
+					"protocol": "https",
+					"host": [
+						"api-tester-adl",
+						"leonardojose",
+						"dev"
+					],
+					"path": [
+						"api",
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar info de cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Cliente actualizado\", () => {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Cristobal Poblete Vidal\",\r\n  \"email\": \"Cristobal@PobleteV.com\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-tester-adl.leonardojose.dev/api/clients/{{clientId}}",
+					"protocol": "https",
+					"host": [
+						"api-tester-adl",
+						"leonardojose",
+						"dev"
+					],
+					"path": [
+						"api",
+						"clients",
+						"{{clientId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Cliente Creado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Cliente eliminado\", () => {\r",
+							"  pm.response.to.have.status(204);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api-tester-adl.leonardojose.dev/api/clients/{{clientId}}",
+					"protocol": "https",
+					"host": [
+						"api-tester-adl",
+						"leonardojose",
+						"dev"
+					],
+					"path": [
+						"api",
+						"clients",
+						"{{clientId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verificar que el cliente fue eliminado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Cliente no existe\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"  const response = pm.response.json();\r",
+							"  \r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api-tester-adl.leonardojose.dev/api/clients",
+					"protocol": "https",
+					"host": [
+						"api-tester-adl",
+						"leonardojose",
+						"dev"
+					],
+					"path": [
+						"api",
+						"clients"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
