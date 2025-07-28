@@ -37,10 +37,12 @@ jobs:
             url: http://localhost:52594
             timeout: 60
 
-
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
-          start: npm run dev
-          wait-on: 'http://localhost:52594'
-          wait-on-timeout: 60
+          component: false
+          record: false
+          publish-summary: true
+        env:
+          CYPRESS_baseUrl: http://localhost:52594
+        working-directory: ./Front-e2e
