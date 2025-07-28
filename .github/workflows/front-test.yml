@@ -23,25 +23,8 @@ jobs:
         working-directory: ./Front-e2e
         run: npm install
 
-
-
-      - name: Start frontend server
-        working-directory: ./Front-e2e
-        run: npm run dev &
-        env:
-          CI: true
-
-      - name: Wait for frontend to be ready
-        uses: jakejarvis/wait-action@master
-        with:
-            url: http://localhost:52594
-            timeout: 60
       - name: Run Cypress tests
-        uses: cypress-io/github-action@v6
-        with:
-          start: npm run dev
-          wait-on: 'http://localhost:52594'
-          wait-on-timeout: 60
-          working-directory: ./Front-e2e
+        run: npx cypress run --config baseUrl=https://test-adl.leonardojose.dev
+        working-directory: ./Front-e2e
         env:
           CI: true
