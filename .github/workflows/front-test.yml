@@ -31,11 +31,11 @@ jobs:
           CI: true
 
       - name: Wait for server to start
-        run: npx wait-on http://localhost:5173
+        run: npx wait-on http://localhost:52594
 
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
           start: npm run dev
-          wait-on: 'http://localhost:5173'
+          wait-on: 'http://localhost:52594'
           wait-on-timeout: 60
