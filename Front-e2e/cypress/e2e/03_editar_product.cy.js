@@ -8,7 +8,7 @@ describe('Editar un articulo existente', () => {
 
   it('Debería actualizar el artículo "Iphone 16" a "Iphone 16 Pro Max"', () => {
     // Buscar el artículo por su SKU para mas precision 
-    cy.get('main').scrollTo('bottom');
+    //cy.get('main').scrollTo('bottom');
     cy.contains('td', 'SKU1212321').scrollIntoView({ duration: 2000 });
 
 

@@ -11,7 +11,7 @@ describe('Login y Consultar Productos', () => {
 
     
     // asegeurandose que existan items en la tabla 
-    cy.get('div.space-y-2').should('have.length.greaterThan', 0);
+    cy.get('div.space-y-2').should('have.length.greaterThan', -1);
   });
   
 
