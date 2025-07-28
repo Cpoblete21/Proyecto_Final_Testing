@@ -25,7 +25,7 @@ jobs:
 
       - name: Run Newman tests
         run: |
-          newman run Back-e2e/collections/Backend_2e2.postman_collection.json \
+          newman run Back-e2e/collections/Backend_e2e.postman_collection.json \
             -r htmlextra \
             --reporter-htmlextra-export report.html
 
