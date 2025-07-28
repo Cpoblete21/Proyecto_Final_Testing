@@ -15,3 +15,5 @@ Este proyecto contiene pruebas automatizadas End-to-End (E2E) para validar funci
  
 - comandos back end : newman run collections/Backend_e2e.postman_collection.json (cli report) ////
                       newman run collections/Backend_2e2.postman_collection.json -r htmlextra --reporter-htmlextra-export report.html  (HTML Report)
+
+  Cuenta con Github actions para front y back.
