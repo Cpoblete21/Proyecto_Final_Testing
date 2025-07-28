@@ -20,7 +20,10 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
+        working-directory: ./Front-e2e
         run: npm install
+
+
 
       - name: Start frontend server
         run: npm run dev &
